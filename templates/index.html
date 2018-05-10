@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>EZ Review</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <style>
+            .center-input {
+                position: absolute;
+                left: 50%;
+                top: 15%;
+            }
+            
+            .search-button {
+                margin:5px;
+                box-shadow: 3px 3px;
+            }
+            
+            .search-button:hover {
+                box-shadow: 3px 3px #5cb85c;
+            }
+
+            .navbar-fixed-top, .navbar-fixed-bottom {
+                /*position: fixed;*/
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                margin-bottom: 0;
+            }
+
+            html, body {
+                overflow: visible;
+            }
+
+        </style>
+    </head>
+    
+    <body>
+        <h1 class="display-2 text-center">EZ Review</h1>
+        <div class="container-fluid">
+            <form class="form-inline" method="POST">
+                <input name="search" id="search" type="text" class="form-control center-block" placeholder="Field of interest" style="width:40%;">
+                <button type="submit" class="btn btn-outline-success search-button center-block">Submit</button>
+            </form>
+            <div class="row">
+                <div class="col" style="background-color:lavender;">
+                    <h3 class="text-center">Papers</h3>
+                    <ul>
+                    {% for i in results.titles %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col" style="background-color:lavenderblush;">
+                    <h3 class="text-center">Datasets</h3>
+                    <ul>
+                    {% for i in results.datasets %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col" style="background-color:lavender;">
+                    <h3 class="text-center">Methods</h3>
+                    <ul>
+                    {% for i in results.methods %}
+                        <li>{{i}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+</html>
