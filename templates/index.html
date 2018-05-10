@@ -43,10 +43,11 @@
         <div class="container-fluid">
             <form class="form-inline" method="POST">
                 <input name="search" id="search" type="text" class="form-control center-block" placeholder="Field of interest" style="width:40%;">
-                <button type="submit" class="btn btn-outline-success search-button center-block">Submit</button>
+                <button type="submit" class="btn btn-outline-success search-button">Submit</button>
             </form>
+            <br>
             <div class="row">
-                <div class="col" style="background-color:lavender;">
+                <div class="col" style="background-color: Moccasin;">
                     <h3 class="text-center">Papers</h3>
                     <ul>
                     {% for i in results.titles %}
@@ -54,7 +55,7 @@
                     {% endfor %}
                     </ul>
                 </div>
-                <div class="col" style="background-color:lavenderblush;">
+                <div class="col" style="background-color: PeachPuff;">
                     <h3 class="text-center">Datasets</h3>
                     <ul>
                     {% for i in results.datasets %}
@@ -62,7 +63,7 @@
                     {% endfor %}
                     </ul>
                 </div>
-                <div class="col" style="background-color:lavender;">
+                <div class="col" style="background-color: Moccasin;">
                     <h3 class="text-center">Methods</h3>
                     <ul>
                     {% for i in results.methods %}
