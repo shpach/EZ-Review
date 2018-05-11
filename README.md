@@ -50,6 +50,8 @@ python3 ez_review.py -q "text mining"
 
 **NOTE:** Do NOT terminate the script while it is cleaning. If you do, you will need to delete the incomplete `./research_papers/research_papers.dat` file if it was created. Otherwise, the program will think the data has already been cleaned!
 
+**Another Note?:** NLTK might yell at you for not having things downloaded, most likely the stopwords file. Simply, follow the directions the error provides.
+
 ## Interpreting the Results
 After 10 to 20 seconds, your results should appear, resulting in a list of relevant papers that you may want to read relating to that topic query! In addition, you will see a list of possible datasets you may want to look further into for your research, as well as popular methods used in the area! Here is the sample output when we input `text mining`:
 ```
