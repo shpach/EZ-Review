@@ -92,7 +92,7 @@ def scale_scores(scores, years, citations, y_w, c_w):
 	offsets = [years[doc[0]] - BASELINE for doc in scores]	# Compute offset year from base year of the top papers
 
 	# Sigmoidal transform
-	def year_transform(x, a=10, b=1.5, c=4, d=1):
+	def year_transform(x, a=1, b=15, c=4, d=1):
 		transform = c / (1 + np.exp(-a*(x-b))) + d
 		return transform
 
