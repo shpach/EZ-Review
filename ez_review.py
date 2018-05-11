@@ -8,17 +8,13 @@ import subprocess
 import os
 import re
 import nltk
+import argparse
 from nltk.corpus import stopwords
 from collections import Counter
-
-
 import scholar 
 
-import requests
 
 NIPS_FPATH = 'papers.csv'
-DOCTERM_FPATH = 'NIPS_1987-2015.csv'
-DOCTERM_PICKLE = 'doc_term.pkl'
 NON_WORDS = re.compile('\W ')
 ALPHA_SPACE = r'[^a-zA-Z ]+'
 CLEANED_DATA = 'research_papers/research_papers.dat'
@@ -71,30 +67,6 @@ def create_document_collection(papers_fname):
 	"""
 	df = pd.read_csv(papers_fname)
 	df = df[['year', 'title', 'paper_text']] 
-	return df
-
-def create_doc_term_matrix():
-	""" 
-	Load document-term matrix from disk into memory 
-	"""
-	df = None
-	if os.path.isfile(DOCTERM_PICKLE):
-		print('Saved dataframe found! Loading saved document-term matrix...')
-		df = pd.read_pickle(DOCTERM_PICKLE)
-	else:
-		print('Could not find saved document-term matrix, loading from scratch...')
-		df = pd.read_csv(DOCTERM_FPATH, index_col=0, keep_default_na=False)
-
-		# Re-map original doc-term words to stemmed words
-		stemmer = nltk.stem.porter.PorterStemmer()
-		row_names = df.index.tolist()
-		stem_queries = [stemmer.stem(name) for name in row_names]
-		df.index = pd.Index(stem_queries)
-		# Collapse duplicate rows
-		df = df.groupby(df.index).sum()
-		print('Saving as pickle file...')
-		df.to_pickle(DOCTERM_PICKLE)
-
 	return df
 
 def clean_data(papers):
@@ -342,11 +314,10 @@ def find_methods(tf_trigrams, df_trigrams, beta=1):
 	return sorted_scores
 
 
-def main(query='information retrieval'):
+def main(query):
 
 	# Gather data
 	collection = create_document_collection(NIPS_FPATH)
-	doc_term_matrix = create_doc_term_matrix()
 
 	# Clean data
 	titles = collection.title
@@ -395,4 +366,7 @@ def main(query='information retrieval'):
 
 	
 if __name__ == '__main__':
-	main()
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-q", "--query", help="Enter your query here", required=True)
+	args = parser.parse_args()
+	main(args.query)
