@@ -83,31 +83,6 @@ def clean_data(papers):
 
 	return cleaned_papers
 
-class ModifiedBM25Ranker(metapy.index.RankingFunction):
-    """
-    Create a new ranking function in Python that can be used in MeTA.
-    """
-    def __init__(self, k1=1.2, b=0.75):
-        self.k1 = k1
-        self.b = b
-        super(ModifiedBM25Ranker, self).__init__()
-
-    def score_one(self, sd):
-        """
-        You need to override this function to return a score for a single term.
-        For fields available in the score_data sd object,
-        @see https://meta-toolkit.org/doxygen/structmeta_1_1index_1_1score__data.html
-        """
-
-        numer = sd.query_term_weight * (self.k1 + 1)
-        denom = sd.query_term_weight + self.k1 * (1 - self.b + self.b * sd.doc_size / sd.avg_dl)
-        idf = np.log((sd.num_docs + 1)/sd.doc_term_count)
-        print(sd.d_id, sd.t_id)
-
-        score = idf * numer / denom
-        
-        return score
-
 def scale_scores(scores, years, citations, y_w, c_w):
 	""" 
 	Weight highly cited and more recent papers higher 
@@ -325,8 +300,6 @@ def main(query):
 	print('Methods: ' + str(ret_methods))
 
 	return ret_titles, ret_years, ret_datasets, ret_methods
-
-
 
 	
 if __name__ == '__main__':
