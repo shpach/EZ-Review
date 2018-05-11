@@ -32,8 +32,13 @@
             }
 
             .center-block {
-                margin: auto;
+                margin: 10px auto;
                 display: block;
+            }
+
+            .center-form {
+                margin: 0 auto;
+                width:60%
             }
 
             html, body {
@@ -46,9 +51,9 @@
     <body>
         <h1 class="display-2 text-center">EZ Review</h1>
         <div class="container-fluid">
-            <form class="form-inline" method="POST">
+            <form method="POST">
                 <input name="search" id="search" type="text" class="form-control center-block" placeholder="Field of interest" style="width:40%;">
-                <button type="submit" class="btn btn-outline-success search-button">Submit</button>
+                <button type="submit" class="btn btn-outline-success search-button center-block">Submit</button>
             </form>
             <br>
             <div class="row">
