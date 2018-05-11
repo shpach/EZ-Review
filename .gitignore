@@ -1,4 +1,6 @@
 .DS_Store
 *.pkl
 *.csv
+*.dat
 __pycache__/
+idx/
