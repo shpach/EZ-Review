@@ -5,7 +5,7 @@ Created by Shandilya (Shawn) Pachgade. Originally created for CS 410 (Text Infor
 
 ## What does this do?
 
-This is a search engine aimed at researchers who are in the beginnings of a research project, specifically in their literature review stage. This application retrieves relevant research papers that a researcher might find interesting to read. This is similar to Google Scholar, but in addition, it finds popular datasets and methods that are used in the field! A major point about this project is that can be used in any field! The only requirements is that you need a collection of research papers. For this short introduction, we will be applying this to the field of data science and machine learning related fields!
+This is a search engine aimed at researchers who are in the beginnings of a research project, specifically in their literature review stage. This application retrieves relevant research papers that a researcher might find interesting to read. This is similar to Google Scholar, but in addition, it finds popular datasets and methods that are used in the field! A major point about this project is that can be used in any field! The only requirement is that you need a collection of research papers. For this short introduction, we will be applying this to data science and machine learning related fields!
 
 ## How does it work?
 
@@ -26,7 +26,7 @@ The top-scoring research papers are then returned to the user as relevant docume
 ### Finding Datasets
 First a list of bigrams is generated from the list of relevant documents, and then matched the second term to the word "dataset". Aggregating all of these bigrams, we found a list of candidate datasets that might be of use, however, some of these might not actually be datasets. In an effort to combat this issue, I created a separate stopwords list used specifically when searching for datasets. This list can be found (and modified) at `dataset_stopwords.txt`. This stopword list was created by aggregating the bigrams to create a background language model for datasets, and then manually picked from the list.
 
-A set of heuristics then come into play, one of which is a combined term-frequency and document-frequency scheme. We favor datasets that appear in multiple documents rather than just one (DF transform), however we also care about how often a dataset appears overall (TF transform) as a measure to verify that the dataset actually exists, and isn't just a stopword or meaningless. To weigh document-frequency over term-frequency, a geometric mean balancing the two is employed, specifically a F-measure with $\beta=5$. In addition, most datasets tend to be be acronyms, and therefore capitalized, thus we weight these candidate datasets more as well. The top scoring candidates are returned as relevant datasets of potential interest.
+A set of heuristics then come into play, one of which is a combined term-frequency and document-frequency scheme. We favor datasets that appear in multiple documents rather than just one (DF transform), however we also care about how often a dataset appears overall (TF transform) as a measure to verify that the dataset actually exists, and isn't just a stopword or meaningless. To weigh document-frequency over term-frequency, a geometric mean balancing the two is employed, specifically a F-measure with $\beta=5$. In addition, most datasets tend to be be acronyms, and therefore capitalized, thus we weigh these candidate datasets more as well. The top scoring candidates are returned as relevant datasets of potential interest.
 
 ### Find Methods
 This is very similar to finding datasets, except instead of finding bigrams, we find trigrams, and match the first term to the word "use" to find candidates. The concept is the same however, except with different parameter values, documented in the code. One of these is that we use $\beta=1$ when computing the F-measure. To enhance performance, other matches can be used, as we are likely ignoring other methods that never become candidates. 
@@ -37,7 +37,7 @@ This project uses Python 3, so make sure you have that before continuing. Specif
 
  1. First clone the repository to your local machine.
  2. You will also need a collection of research papers so that we can actually rank documents! We will use the NIPS dataset found [here](https://www.kaggle.com/benhamner/nips-papers/data). Please download `papers.csv`, unzip the download, and place the `papers.csv` in the **top-level directory** of the cloned repository.
- 3. Now you can install the necessary dependencies, like below:
+ 3. Now you can install the necessary dependencies, like so:
 ```bash
 pip3 install -r requirements.txt 
 ```
