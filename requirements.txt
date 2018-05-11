@@ -1,8 +1,6 @@
-Flask==0.12.2
-requests==2.18.4
 pandas==0.20.3
-metapy==0.2.9
 numpy==1.13.3
+requests==2.18.4
 nltk==3.2.5
-BeautifulSoup==3.2.1
-beautifulsoup4==4.6.0
+metapy==0.2.9
+Flask==0.12.2

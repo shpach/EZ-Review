@@ -11,7 +11,6 @@ import nltk
 import argparse
 from nltk.corpus import stopwords
 from collections import Counter
-import scholar 
 
 
 NIPS_FPATH = 'papers.csv'
@@ -24,42 +23,7 @@ DATASET_STOPWORDS = 'dataset_stopwords.txt'
 SUBSET = 100
 MIN_WORD_LEN = 3
 
-######################
-### Online Methods ###
-######################
-# NOTE: Try to only perform these once, otherwise risk getting rate-limited or blocked
 
-def citation_retriever(title):
-	""" 
-	Retrieve number of citation for each paper in our collection 
-	"""
-	acc = 0
-	# Set up scraper
-	querier = scholar.ScholarQuerier()
-	settings = scholar.ScholarSettings()
-	querier.apply_settings(settings)
-	query = scholar.SearchScholarQuery()
-
-	while True:
-		print(acc)
-
-		# Set query parameters
-		query.set_author("Alan Turing")
-		query.set_words("computing")
-		query.set_num_page_results(1)
-
-		querier.send_query(query)
-		# Print the URL of the first article found
-		print(querier.articles[0]['url'])
-		BLOCK_BYPASS = random.randint(15,60)
-		time.sleep(BLOCK_BYPASS)
-		acc += 1
-
-
-#######################
-### Offline Methods ###
-#######################
-# NOTE: Try to only perform once, as these operations take very long
 
 def create_document_collection(papers_fname):
 	""" 
